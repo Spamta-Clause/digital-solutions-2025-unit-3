@@ -1,11 +1,8 @@
 import csv
 
-with open("data/student_data.csv", mode="r", encoding="utf-8") as csv_file:
-    csv_reader = csv.DictReader(csv_file)
-    header = next(csv_reader)
-    print(header)
+with open("data/student_data.csv", mode="r", encoding="utf-8") as in_file:
+    csv_reader = csv.reader(in_file)
 
-    for row in csv_reader:
-        student_id = int(row[0])
-        if student_id > 395:
-            print(f"{student_id}: {row[1]} {row[2]}")
+    with open("data/students_data.tsv", mode="w", encoding="utf-8", newline="") as out_file:
+        tsv_writer = csv.writer(out_file, delimiter="\t")
+        tsv_writer.writerows(csv_reader)
